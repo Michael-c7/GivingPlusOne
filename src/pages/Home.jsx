@@ -27,7 +27,7 @@ const Home = () => {
                 <form className='flex bg-white rounded-sm'>
                   <label className='text-black mx-2 text-xl' htmlFor="search"><IoSearch/></label>
                   <input type="text" name="search" id="search" className=' text-black' placeholder='Explore Causes' />
-                  <button type="submit" className='btn-main'>Search</button>
+                  <button type="submit" className='btn-main rounded-l-none'>Search</button>
                 </form>
               </div>
 
