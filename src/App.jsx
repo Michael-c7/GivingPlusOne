@@ -1,23 +1,43 @@
-import { useState } from 'react'
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+} from 'react-router-dom';
+
+// pages
+import Home from './pages/Home';
+import Error from './pages/Error';
+import Search from './pages/Search';
+import SingleItem from './pages/SingleItem';
+import About from './pages/About';
+
+// components
+import Navbar from './components/Navbar';
+
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    errorElement: <Error/>,
+    element: (
+      <>
+        <Navbar />
+        <Outlet />
+      </>
+    ),
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'search', element: <Search /> },
+      { path: 'about', element: <About /> },
+      { path: 'singleItem/:itemId', element: <SingleItem /> },
+      // { path: '*', element: <Navigate to="/" /> }, // Redirect to Home for unknown routes
+    ],
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1 className=' text-center'>givingPlusOne</h1>
-      <div className="  bg-fuchsia-500 rounded text-zinc-900 p-2 text-3xl my-4">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-
-
-      <p className="text-3xl  underline bg-blue-500">
-      Hello world!
-      </p>
-    </>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
