@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <Home /> },
-      { path: 'search', element: <Search /> },
+      { path: 'search', element: <Search />, },
       { path: 'about', element: <About /> },
       { path: 'howItWorks', element: <HowItWorks /> },
       { path: 'singleItem/:itemId', element: <SingleItem /> },
@@ -37,6 +37,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 function App() {
   return <RouterProvider router={router} />;

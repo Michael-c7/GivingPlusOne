@@ -2,8 +2,18 @@ import React from 'react'
 import { IoSearch } from "react-icons/io5";
 
 import SearchInput from '../components/SearchInput';
+import { useStandardContext } from '../standard_context';
+
+
 
 const Home = () => {
+  const { searchInputValue, setSearchInputValue} = useStandardContext()
+
+  React.useEffect(() => {
+    // reset the search input, need to do this because its shared
+    setSearchInputValue("")
+  }, [])
+
   return (
     <div id='homepage'>       
         <div className="header">
@@ -37,6 +47,7 @@ const Home = () => {
         
         {/* <!--Content starts--> */}
         <footer className="content flex-center">
+            {/* &#9829; is a heart */}
             <p>Made with &#9829; by Michael Carr</p>
         </footer>
         {/* <!--Content ends--> */}
