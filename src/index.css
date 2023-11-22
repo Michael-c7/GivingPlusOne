@@ -98,13 +98,13 @@ p {
 }
 
 .inner-header {
-  height:59vh;
+  height:54vh;
   width:100%;
   margin: 0;
   padding: 0;
 }
 
-.flex { /*Flexbox for containers*/
+.flex-center { /*Flexbox for containers*/
   display: flex;
   justify-content: center;
   align-items: center;

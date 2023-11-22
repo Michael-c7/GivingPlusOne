@@ -1,36 +1,18 @@
 import React from 'react'
 import { IoSearch } from "react-icons/io5";
 
+import SearchInput from '../components/SearchInput';
 
 const Home = () => {
   return (
-    <div id='homepage'>
-      {/* <div className='absolute'>
-        <h1>More than 1 million 501(c)(3) charities at your fingertips.</h1>
-        <h2>What are you waiting for? Explore and support a cause that matters to you.</h2>
-        <form>
-          <label>icon</label>
-          <input type="text" name="" id="" />
-          <button type="submit" className='btn-main'>Search</button>
-        </form>
-      </div> */}
-
-
-        
+    <div id='homepage'>       
         <div className="header">
             {/* <!--Content before waves--> */}
-            <div className="inner-header flex">
+            <div className="inner-header flex-center">
               <div>
-              <h1  className=' font-semibold'>More than 1 million 501(c)(3) charities at your fingertips.</h1>
-              <h2 className="mb-6">What are you waiting for? Explore and support a cause that matters to you.</h2>
-              <div className='flex'> 
-                <form className='flex bg-white rounded-sm'>
-                  <label className='text-black mx-2 text-xl' htmlFor="search"><IoSearch/></label>
-                  <input type="text" name="search" id="search" className=' text-black' placeholder='Explore Causes' />
-                  <button type="submit" className='btn-main rounded-l-none'>Search</button>
-                </form>
-              </div>
-
+                <h1 className='font-semibold'>More than 1 million 501(c)(3) charities at your fingertips.</h1>
+                <h2 className="mb-6">What are you waiting for? Explore and support a cause that matters to you.</h2>
+                <SearchInput/>
               </div>
             </div>
             
@@ -54,7 +36,7 @@ const Home = () => {
         {/* <!--Header ends--> */}
         
         {/* <!--Content starts--> */}
-        <footer className="content flex">
+        <footer className="content flex-center">
             <p>Made with &#9829; by Michael Carr</p>
         </footer>
         {/* <!--Content ends--> */}
