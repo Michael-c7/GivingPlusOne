@@ -50,7 +50,6 @@ const SingleItem = () => {
           <p className='text-2xl my-4'>{charityData.descriptionLong}</p>
 
           <Link className='text-2xl my-4' to={`https://www.every.org/${charityData.ein}#donate`}>Donate Link</Link>
-          <Link className='text-2xl my-4' to={`https://www.every.org/${charityData.ein}#donate`}>Donate Link</Link>
           
         </div>
 
