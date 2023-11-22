@@ -72,7 +72,7 @@ const Search = () => {
             <h4 className='font-semibold mt-6'>Causes</h4>
             {causeTypes.map((item, index) => {
               return (
-                <div key={item} className='flex px-2  my-4  select-none'>
+                <div key={item} className='flex px-2 my-4 select-none'>
                   <label htmlFor={item} className='flex-1'>{item}</label>
                   <input type="checkbox" id={item} name={item} value={item} className=''/>
                 </div>
@@ -92,7 +92,7 @@ const Search = () => {
             </div>
           </header>
           {/* main, where cards go */}
-          <div className='grid gap-8'>
+          <div className='grid-container'>
             {/* Loading */}
             {isCharityDataLoading & charityData.length < 1 ? (
               <h1 className='font-semibold'>Loading...</h1>
@@ -105,8 +105,8 @@ const Search = () => {
               return (
                 <div key={item.ein} className='bg-gray-100 shadow-[rgba(25,_25,_25,_0.10)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
                   {/* img */}
-                  <Link to={`/singleItem/${item.ein || index}`} onClick={() => setUserId(item.ein)}>
-                    <img src={item.coverImageUrl || defaultCoverImg} alt={item.name || "cover image"} className='min-w-full max-h-[20rem] object-cover'/>
+                  <Link to={`/singleItem/${item.ein || index}`} onClick={() => setUserId(item.ein)} className=' '>
+                    <img src={item.coverImageUrl || defaultCoverImg} alt={item.name || "cover image"} className=''/>
                   </Link>
                   {/* info */}
                   <div className='p-4'>
@@ -129,7 +129,7 @@ const Search = () => {
             })}
           </div>
 
-          {/* Load more charities button */}
+          {/* Load more charities button, only show the btn when charities are loaded in */}
           {!isCharityDataLoading & !charityData.length < 1 ? (
             <div className='flex justify-center items-center p-4'>
               <button className='btn-secondary' onClick={() => setCurrentPage(currentPage + 1)}>Load more charities...</button>
