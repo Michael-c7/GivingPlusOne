@@ -62,8 +62,9 @@ a {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two rows with automatic height */
-  grid-gap: 1.5rem; /* Adjust the gap between grid items as needed */
+  /* When you fix the layout switch to two columns : 1fr 1fr */
+  grid-template-columns: 1fr;
+  gap: 1.5rem; /* Adjust the gap between grid items as needed */
 }
 
 

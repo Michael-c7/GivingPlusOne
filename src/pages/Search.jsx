@@ -57,7 +57,7 @@ const Search = () => {
   return (
     <div className=' bg-gray-100'>
     {/* container */}
-      <div className='flex mx-80 py-8'>
+      <div className='flex lg:mx-52 mx-2 py-8'>
         {/* Filter section */}
         <aside className='w-1/4 mr-8 p-4 bg-white rounded-sm'>
           <article>
@@ -106,7 +106,7 @@ const Search = () => {
                 <div key={item.ein} className='bg-gray-100 shadow-[rgba(25,_25,_25,_0.10)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
                   {/* img */}
                   <Link to={`/singleItem/${item.ein || index}`} onClick={() => setUserId(item.ein)} className=' '>
-                    <img src={item.coverImageUrl || defaultCoverImg} alt={item.name || "cover image"} className=''/>
+                    <img src={item.coverImageUrl || defaultCoverImg} alt={item.name || "cover image"} className='h-64 w-full object-cover'/>
                   </Link>
                   {/* info */}
                   <div className='p-4'>
