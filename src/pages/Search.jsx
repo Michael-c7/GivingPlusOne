@@ -17,6 +17,7 @@ const Search = () => {
   const [charityData, setCharityData] = React.useState([])
 
   // console.log(searchInputValue)
+  // get value from location search & causes checkboxes
 
   async function fetchData() {
     let url = `https://partners.every.org/v0.2/search/pets?apiKey=${import.meta.env.VITE_CHARITY_API_KEY}&take=${amountToGet}&page=${currentPage}`
@@ -83,20 +84,20 @@ const Search = () => {
             </div>
           </header>
           {/* main, where cards go */}
-          <div className='grid grid-rows-3 '>
+          <div className='grid gap-8  '>
             {charityData.map((item, index) => {
             
               return (
-                <div key={item.ein} className='bg-gray-100'>
+                <div key={item.ein} className='bg-gray-100 shadow-[rgba(25,_25,_25,_0.10)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
                   {/* img */}
                   <Link>
-                    <img src={item.coverImageUrl} alt={item.name}/>
+                    <img src={item.coverImageUrl} alt={item.name} className='min-w-full max-h-[20rem] object-cover'/>
                   </Link>
                   {/* info */}
-                  <div>
+                  <div className='p-4'>
                     <span>
-                      <h2>{item.name}</h2>
-                      <h3>{item.location}</h3>
+                      <h2 className='font-semibold text-xl mb-1'>{item.name}</h2>
+                      <h3 className='font-semibold'>{item.location}</h3>
                     </span>
                     <div className='mt-6 mb-12'>{item.description}</div>
 
