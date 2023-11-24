@@ -20,6 +20,8 @@ const Search = () => {
   const [charityData, setCharityData] = React.useState([])
   const [isCharityDataLoading, setIsCharityDataLoading] = React.useState(true)
 
+  const [isError, setIsError] = React.useState(false)
+
   // console.log(searchInputValue)
   // get value from location search & causes checkboxes
 
@@ -39,17 +41,20 @@ const Search = () => {
       const { nonprofits } = data
       // console.log(nonprofits);
       setIsCharityDataLoading(false)
+      setIsError(false)
+
       setCharityData(nonprofits)
 
     } catch (error) {
       setIsCharityDataLoading(false)
+      setIsError(true)
       console.error('Error fetching data:', error.message);
     }
   }
 
   React.useEffect(() => {
     fetchData()
-  }, [searchInputValue])
+  }, [searchInputValue, currentPage])
 
 
   
@@ -62,7 +67,7 @@ const Search = () => {
         <aside className='w-1/4 mr-8 p-4 bg-white rounded-sm'>
           <article>
             <h4 className='font-semibold'>Location</h4>
-            <div className='flex-center bg-gray-100 rounded-sm px-2 my-4 mx-2'>
+            <div className='flex flex-start items-center bg-gray-100 rounded-sm p-2 my-4 mx-2'>
               {/* search location */}
               <div className='text-black mx-2 text-xl' htmlFor="searchLocation"><IoSearch/></div>
               <input type="text" name="searchLocation" id="searchLocation" className='text-black bg-gray-100 focus:outline-0 placeholder:text-gray-600 py-2' placeholder='Search location' autoComplete="off"/>
@@ -98,8 +103,16 @@ const Search = () => {
               <h1 className='font-semibold'>Loading...</h1>
             ) : ""}
 
+            {/* No Results Found */}
+            {!isCharityDataLoading & isError & charityData.length < 1 ? (
+              <div className='flex flex-col items-center'>
+                <h1 className='font-semibold'>No Results Found</h1>
+                <h2 className='my-2 '>Please refine your search and try again</h2>
+              </div>
+            ) : ""}
+            
             {/* Error */}
-            {!isCharityDataLoading & charityData.length < 1 ? (
+            {isError ? (
               <div className='flex flex-col items-center'>
                 <h1 className='font-semibold'>Error loading data</h1>
                 <h2 className='my-2 '>If you'd like to see the app in action go to the how it work tab</h2>
@@ -108,23 +121,26 @@ const Search = () => {
             ) : ""}
             
             {/* Actual data */}
-            {charityData.map((item, index) => {
+            {charityData.map((item) => {
               let defaultDescription = "We don't know a lot about them but we're sure their great. Click on the Details button to learn more information."
 
               return (
-                <div key={item.ein} className='bg-gray-100 shadow-[rgba(25,_25,_25,_0.10)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
+                <div key={item.ein} className='flex flex-col  bg-gray-100 shadow-[rgba(25,_25,_25,_0.10)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
                   {/* img */}
-                  <Link to={`/singleItem/${item.ein || index}`} onClick={() => setUserId(item.ein)} className=' '>
+                  <Link to={`/singleItem/${item.ein}`} onClick={() => setUserId(item.ein)}>
                     <img src={item.coverImageUrl || defaultCoverImg} alt={item.name || "cover image"} className='h-64 w-full object-cover'/>
                   </Link>
                   {/* info */}
-                  <div className='p-4'>
-                    <span>
-                      <h2 className='font-semibold text-xl mb-1'>{item.name || "Location unavailable"}</h2>
-                      <h3 className='font-semibold'>{item.location || "Location unavailable"}</h3>
-                    </span>
-                    <div className='mt-6 mb-12'>
-                    {item.description || defaultDescription}
+                  <div className='p-4 flex flex-col justify-between flex-1'>
+                    <div>
+                      <div>
+                        <h2 className='font-semibold text-xl mb-1'>{item.name || "Location unavailable"}</h2>
+                        <h3 className='font-semibold'>{item.location || "Location unavailable"}</h3>
+                      </div>
+
+                      <div className='mt-6 mb-12'>
+                        {item.description || defaultDescription}
+                      </div>
                     </div>
 
                     {/* btns */}
