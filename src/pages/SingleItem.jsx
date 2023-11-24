@@ -53,27 +53,30 @@ const SingleItem = () => {
           <h1 className='font-semibold'>Loading...</h1>
         ) : ""}
         {/* Actual Data */}
-        <header className='rounded-md shadow-md border border-gray-200 lg:flex flex-col'>
+        <header className='rounded-md shadow-md border border-gray-200'>
           {/* bg img */}
           <img className='min-h-[25rem] max-h-[25rem] w-full object-cover rounded-t-md' src={charityData.coverImageUrl || defaultBgImage}  alt='cover image'/>
           {/*  heading profile info */}
-          <div className='flex items-center py-6 px-10'>
-            <img className='w-24 h-24 rounded-full border p-1 border-gray-200' src={charityData.logoUrl || defaultUserImage}  alt='profile image'/>
-            {/* name and short description */}
-            <div className='ml-4'>
-              <h2 className='text-2xl font-semibold'>{charityData.name}</h2>
-              <Link to={charityData.websiteUrl}>{charityData.websiteUrl}</Link>
+          <div className='flex items-center py-6 px-10 flex-col md:flex-row'>
+            <div className='flex items-center w-full flex-auto md:justify-start justify-center'>
+              <img className='w-24 h-24 rounded-full border p-1 border-gray-200 hidden sm:block' src={charityData.logoUrl || defaultUserImage}  alt='profile image'/>
+              {/* name and short description */}
+              <div className='sm:ml-0 ml-4 sm:mb-0 mb-4'>
+                <h2 className='text-2xl font-semibold'>{charityData.name}</h2>
+                <Link to={charityData.websiteUrl}>{charityData.websiteUrl}</Link>
+              </div>
             </div>
+
             {/* Btns */}
-            <div className='ml-auto'>
-            <Link className='btn-main mr-6' to={`https://www.every.org/${charityData.ein}#donate`}>Donate</Link>
-            <Link className='btn-secondary' to={`${charityData.profileUrl}`}>Every Profile</Link>
+            <div className='lg:mx-auto w-full flex flex-1 justify-center min-w-fit  items-center  '>
+              <Link className='btn-main mr-6' to={`https://www.every.org/${charityData.ein}#donate`}>Donate</Link>
+              <Link className='btn-secondary' to={`${charityData.profileUrl}`}>Every Profile</Link>
             </div>
           </div>
         </header>
 
         {/* More info & google maps */}
-        <div className='flex gap-12 my-8'>
+        <div className='flex gap-12 my-8 flex-col md:flex-row'>
           {/* More info */}
           <div className='flex-1 shadow-sm border-gray-200 border'>
             <header className='bg-gray-200 p-4 text-lg'>
@@ -111,7 +114,7 @@ const SingleItem = () => {
           {/* embedded Google Maps location  */}
           <div className='flex-1 shadow-sm border-gray-200 border'>
             <div className='w-full h-full iframe-loader-gif'>
-            <iframe src={`https://maps.google.com/maps?q=+${charityData.locationLatLng?.coordinates[1]}+${charityData.locationLatLng?.coordinates[0]}+&t=&z=15&ie=UTF8&iwloc=&output=embed`} className='w-full h-full'/>
+            <iframe src={`https://maps.google.com/maps?q=+${charityData.locationLatLng?.coordinates[1]}+${charityData.locationLatLng?.coordinates[0]}+&t=&z=15&ie=UTF8&iwloc=&output=embed`} className='w-full md:h-full h-96'/>
             </div>
           </div>
         </div>
