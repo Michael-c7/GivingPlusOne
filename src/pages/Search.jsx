@@ -26,7 +26,8 @@ const Search = () => {
   // get value from location search & causes checkboxes
 
   async function fetchData() {
-    let url = `https://partners.every.org/v0.2/search/pets?apiKey=${import.meta.env.VITE_CHARITY_API_KEY}&take=${amountToGet}&page=${currentPage}`
+    // let baseSearchUrl = "https://partners.every.org/v0.2/search/"
+    let url = `https://partners.every.org/v0.2/search/${searchInputValue}?apiKey=${import.meta.env.VITE_CHARITY_API_KEY}&take=${amountToGet}&page=${currentPage}`
 
 
     try {
@@ -93,7 +94,17 @@ const Search = () => {
             <div className='flex-center bg-gray-100 rounded-sm px-2 my-4 w-full'>
               {/* search location */}
               <div className='text-black mx-2 text-xl' htmlFor="search"><IoSearch/></div>
-              <input type="text" name="search" id="search" className='text-black bg-gray-100 focus:outline-0 placeholder:text-gray-600 py-2 w-full' placeholder='Explore charities' autoComplete="off"/>
+              {/* searchInputValue, setSearchInputValue */}
+              <input 
+                type="text"
+                name="search"
+                id="search" 
+                className='text-black bg-gray-100 focus:outline-0 placeholder:text-gray-600 py-2 w-full'
+                placeholder='Explore charities'
+                autoComplete="off"
+                value={searchInputValue}
+                onChange={(e) => setSearchInputValue(e.target.value)}
+              />
             </div>
           </header>
           {/* main, where cards go */}
@@ -104,7 +115,7 @@ const Search = () => {
             ) : ""}
 
             {/* No Results Found */}
-            {!isCharityDataLoading & isError & charityData.length < 1 ? (
+            {!isCharityDataLoading & !isError & charityData.length < 1 ? (
               <div className='flex flex-col items-center'>
                 <h1 className='font-semibold'>No Results Found</h1>
                 <h2 className='my-2 '>Please refine your search and try again</h2>
