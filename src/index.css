@@ -58,16 +58,6 @@ a {
 
 
 
-
-
-.grid-container {
-  display: grid;
-  /* When you fix the layout switch to two columns : 1fr 1fr */
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem; /* Adjust the gap between grid items as needed */
-}
-
-
 /* the loading gif for the iframe*/
 .iframe-loader-gif {
   background:url(../src/assets/images/loader.gif) center center no-repeat;

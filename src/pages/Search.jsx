@@ -62,7 +62,7 @@ const Search = () => {
   return (
     <div className=' bg-gray-100'>
     {/* container */}
-      <div className='flex lg:mx-52 mx-2 py-8'>
+      <div className='flex 2xl:mx-52 xl:mx-40  mx-4 py-8'>
         {/* Filter section */}
         <aside className='w-1/4 mr-8 p-4 bg-white rounded-sm'>
           <article>
@@ -70,7 +70,7 @@ const Search = () => {
             <div className='flex flex-start items-center bg-gray-100 rounded-sm p-2 my-4 mx-2'>
               {/* search location */}
               <div className='text-black mx-2 text-xl' htmlFor="searchLocation"><IoSearch/></div>
-              <input type="text" name="searchLocation" id="searchLocation" className='text-black bg-gray-100 focus:outline-0 placeholder:text-gray-600 py-2' placeholder='Search location' autoComplete="off"/>
+              <input type="text" name="searchLocation" id="searchLocation" className='bg-transparent text-black focus:outline-0 placeholder:text-gray-600 py-2 w-full' placeholder='Search location' autoComplete="off"/>
             </div>
           </article>
           <article>
@@ -97,7 +97,7 @@ const Search = () => {
             </div>
           </header>
           {/* main, where cards go */}
-          <div className='grid-container'>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-6'>
             {/* Loading */}
             {isCharityDataLoading & charityData.length < 1 ? (
               <h1 className='font-semibold'>Loading...</h1>
