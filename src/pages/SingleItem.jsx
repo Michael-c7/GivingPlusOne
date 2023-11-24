@@ -34,7 +34,7 @@ const SingleItem = () => {
       setCharityData(data.data.nonprofit)
       //  can also get the tags w/ data.data.nonprofitTags
       setCharityTagData(data.data.nonprofitTags[0].tagName)
-      console.log(data.data.nonprofit)
+      // console.log(data.data.nonprofit)
     } catch (error) {
       setIsCharityDataLoading(false)
       console.error('Error fetching data:', error.message);
