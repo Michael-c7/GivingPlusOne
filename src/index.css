@@ -68,8 +68,11 @@ a {
 }
 
 
+/* the loading gif for the iframe*/
+.holds-the-iframe {
+  background:url(../src/assets/images/loader.gif) center center no-repeat;
 
-
+}
 
 
 
