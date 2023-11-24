@@ -97,6 +97,15 @@ const Search = () => {
             {isCharityDataLoading & charityData.length < 1 ? (
               <h1 className='font-semibold'>Loading...</h1>
             ) : ""}
+
+            {/* Error */}
+            {!isCharityDataLoading & charityData.length < 1 ? (
+              <div className='flex flex-col items-center'>
+                <h1 className='font-semibold'>Error loading data</h1>
+                <h2 className='my-2 '>If you'd like to see the app in action go to the how it work tab</h2>
+                <Link to="/howItWorks" className='btn-main my-4'>App Demonstration</Link>
+              </div>
+            ) : ""}
             
             {/* Actual data */}
             {charityData.map((item, index) => {
