@@ -22,12 +22,44 @@ const Search = () => {
 
   const [isError, setIsError] = React.useState(false)
 
+  const [locationSearchInput, setLocationSearchInput] = React.useState("")
+
+  // all the causes
+  const [checkedItems, setCheckedItems] = React.useState({});
+
+  const [cleanedCheckedItems, setCleanedCheckedItems] = React.useState([])
+
+  // Handler function to update the state when a checkbox is clicked
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setCheckedItems((prevCheckedItems) => ({ ...prevCheckedItems, [name]: checked }));
+  }
+
+
+  function generateUniqueKey() {
+    // Date.now() provides a timestamp, ensuring uniqueness
+    const timestamp = Date.now();
+  
+    // Math.random() generates a random number to further enhance uniqueness
+    const random = Math.random();
+  
+    // Convert the combination to a string and remove the decimal point
+    const key = `${timestamp}${random}`.replace('.', '');
+  
+    return key;
+  }
+  
+
   // console.log(searchInputValue)
   // get value from location search & causes checkboxes
 
   async function fetchData() {
-    // let baseSearchUrl = "https://partners.every.org/v0.2/search/"
-    let url = `https://partners.every.org/v0.2/search/${searchInputValue}?apiKey=${import.meta.env.VITE_CHARITY_API_KEY}&take=${amountToGet}&page=${currentPage}`
+    let baseSearchUrl = "https://partners.every.org/v0.2/search/"
+    let address = `address=${locationSearchInput}`
+
+    let causes = `causes=${cleanedCheckedItems.join(",")}`
+    console.log(cleanedCheckedItems.join(","))
+    let url = `${baseSearchUrl}${searchInputValue}&${address}&causes=${causes}?apiKey=${import.meta.env.VITE_CHARITY_API_KEY}&take=${amountToGet}&page=${currentPage}`
 
 
     try {
@@ -53,9 +85,38 @@ const Search = () => {
     }
   }
 
+  // React.useEffect(() => {
+  //   console.log(checkedItems)
+  // }, [checkedItems])
+
+
   React.useEffect(() => {
     fetchData()
-  }, [searchInputValue, currentPage])
+  }, [searchInputValue, currentPage, locationSearchInput, checkedItems])
+
+
+
+
+  React.useEffect(() => {
+    // cleanedCheckedItems, setCleanedCheckedItems
+
+    const filterTrueValues = (data) => {
+      // Use Object.entries to get an array of [key, value] pairs
+      return Object.entries(data)
+        // Filter the pairs to include only those with true values
+        .filter(([key, value]) => value === true)
+        // Map the filtered pairs to get the names
+        .map(([key]) => key);
+    }
+
+    // set clean for the causes filter http request
+    setCleanedCheckedItems(filterTrueValues(checkedItems))
+
+  }, [checkedItems])
+
+
+
+
 
 
   
@@ -71,16 +132,33 @@ const Search = () => {
             <div className='flex flex-start items-center bg-gray-100 rounded-sm p-2 my-4 mx-2'>
               {/* search location */}
               <div className='text-black mx-2 text-xl' htmlFor="searchLocation"><IoSearch/></div>
-              <input type="text" name="searchLocation" id="searchLocation" className='bg-transparent text-black focus:outline-0 placeholder:text-gray-600 py-2 w-full' placeholder='Search location' autoComplete="off"/>
+              <input 
+                type="text"
+                name="searchLocation"
+                id="searchLocation"
+                className='bg-transparent text-black focus:outline-0 placeholder:text-gray-600 py-2 w-full'
+                placeholder='Search for city or country'
+                autoComplete="off"
+                value={locationSearchInput}
+                onChange={(e) => setLocationSearchInput(e.target.value)} 
+              />
             </div>
           </article>
           <article>
             <h4 className='font-semibold mt-6'>Causes</h4>
             {causeTypes.map((item, index) => {
               return (
-                <div key={item} className='flex px-2 my-4 select-none'>
+                <div 
+                  key={index}className='flex px-2 my-4 select-none'>
                   <label htmlFor={item} className='flex-1'>{item}</label>
-                  <input type="checkbox" id={item} name={item} value={item} className=''/>
+                  <input 
+                    type="checkbox"
+                    id={item}
+                    name={item}
+                     
+                    checked={checkedItems[item.label]}
+                    onChange={handleCheckboxChange}
+                  />
                 </div>
               )
             })}
@@ -108,7 +186,7 @@ const Search = () => {
             </div>
           </header>
           {/* main, where cards go */}
-          <div className='grid lg:grid-cols-2 grid-cols-1 gap-6'>
+          <div className='grid lg:grid-cols-2 grid-cols-1 gap-6' key={() => generateUniqueKey()}>
             {/* Loading */}
             {isCharityDataLoading & charityData.length < 1 ? (
               <h1 className='font-semibold'>Loading...</h1>
