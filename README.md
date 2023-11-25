@@ -7,3 +7,9 @@
 
 # Profile Page
 ![profilePage](https://github.com/Michael-c7/GivingPlusOne/assets/58267348/12dc7cc9-40c6-482f-982e-5b6be0bea950)
+
+
+# Rate Limit
+The rate limit of the every.org API
+  - Search: 500 requests per minute
+  - Nonprofit details: 100 requests per minute
